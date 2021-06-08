@@ -15,7 +15,7 @@
 
 package main
 
-import "github.com/sigstore/fulcio/cmd/app"
+import "github.com/sigstore/fulcio/cmd/client/app"
 
 func main() {
 	app.Execute()

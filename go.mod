@@ -19,6 +19,7 @@ require (
 	github.com/mitchellh/mapstructure v1.4.1
 	github.com/prometheus/client_golang v1.11.0
 	github.com/rs/cors v1.7.0
+	github.com/sigstore/sigstore v0.0.0-20210609084117-386ea718fc64 // indirect
 	github.com/smartystreets/assertions v1.0.0 // indirect
 	github.com/spf13/cobra v1.1.3
 	github.com/spf13/pflag v1.0.5
