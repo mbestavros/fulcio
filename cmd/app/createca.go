@@ -28,7 +28,6 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/acm"
 
@@ -113,34 +112,32 @@ certificate authority for an instance of sigstore fulcio`,
 		// Load the Shared AWS Configuration (~/.aws/config)
 		cfg, err := config.LoadDefaultConfig(context.TODO())
 		if err != nil {
-			log.Fatal(err)
+			log.Logger.Fatal(err)
 		}
 
 		// Create an ACM service client
 		client := acm.NewFromConfig(cfg)
 
-		output, err := client.ImportCertificate(context.TODO(), &acm.ImportCertificateInput{
-			Certificate: pemBytes
-			PrivateKey: privKey
+		createoutput, err := client.ImportCertificate(context.TODO(), &acm.ImportCertificateInput{
+			Certificate: pemBytes,
+			PrivateKey: nil,
 		})
 
 
 		if err != nil {
-			log.Fatal(err)
+			log.Logger.Fatal(err)
 		}
 
-		output, err := client.ListCertificates(context.TODO(), &acm.ListCertificatesInput{
-
-		})
+		output, err := client.ListCertificates(context.TODO(), &acm.ListCertificatesInput{})
 
 
 		if err != nil {
-			log.Fatal(err)
+			log.Logger.Fatal(err)
 		}
 
 		log.Logger.Info("Stored certificates:")
 		for _, object := range output.CertificateSummaryList {
-			log.Printf("certificatearn=%s domainname=%d", object.CertificateArn, object.DomainName)
+			log.Logger.Info("certificatearn=%s domainname=%d", object.CertificateArn, object.DomainName)
 		}
 
 
